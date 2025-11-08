@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Portail Citoyen Intelligent</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    .hero {
+      text-align: center;
+      padding: 40px 0;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #2563eb;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #6b7280;
+      margin-bottom: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+    .feature-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      width: 280px;
+      text-align: center;
+      border: 1px solid #e5e7eb;
+    }
+    .feature-card h3 {
+      color: #2563eb;
+      margin-bottom: 15px;
+    }
+    .feature-card p {
+      color: #6b7280;
+      margin-bottom: 20px;
+    }
+    .btn-large {
+      padding: 12px 24px;
+      font-size: 1.1rem;
+    }
+
+    /* Style du logo en bas à gauche */
+    .logo-fixed {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+    }
+    .logo-fixed img {
+      height: 70px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="hero">
+        <h1>Portail Citoyen Intelligent</h1>
+        <p>Une plateforme moderne pour simplifier vos démarches administratives et faciliter la communication avec les services publics.</p>
+        
+        <nav>
+          <a class="btn primary btn-large" href="{{ url_for('login') }}">Se connecter</a>
+          <a class="btn btn-large" href="{{ url_for('register') }}">S'inscrire</a>
+        </nav>
+      </div>
+
+      <div class="features">
+        <div class="feature-card">
+          <h3>Pour les Citoyens</h3>
+          <p>Déposez vos demandes, suivez leur traitement et communiquez directement avec les services concernés.</p>
+          <a class="btn primary small" href="{{ url_for('register') }}?role=citizen">Devenir citoyen</a>
+        </div>
+        
+        <div class="feature-card">
+          <h3>Pour les Agents</h3>
+          <p>Gérez les demandes des citoyens, traitez les dossiers et offrez un service public de qualité.</p>
+          <a class="btn primary small" href="{{ url_for('register') }}?role=agent">Devenir agent</a>
+        </div>
+      </div>
+
+      <div style="margin-top: 40px; text-align: center; color: #6b7280; font-size: 0.9rem;">
+        <p>Service sécurisé • Assistance 24/7 • traitement rapide des demandes</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logo en bas à gauche -->
+  <div class="logo-fixed">
+    <img src="{{ url_for('static', filename='images/logo-portail.png') }}" alt="Logo Portail Citoyen Intelligent">
+  </div>
+</body>
+</html>

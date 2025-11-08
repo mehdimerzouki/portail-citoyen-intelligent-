@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Modifier la demande</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="card" style="max-width:720px;margin:0 auto">
+      <h2>Modifier la demande #{{ req['id'] }}</h2>
+      <form method="post" enctype="multipart/form-data">
+        <label>Type de demande</label>
+        <select name="type" required>
+          <option value="">Choisir...</option>
+          <option value="Acte de naissance" {% if req['type'] == 'Acte de naissance' %}selected{% endif %}>Acte de naissance</option>
+          <option value="Acte de mariage" {% if req['type'] == 'Acte de mariage' %}selected{% endif %}>Acte de mariage</option>
+          <option value="Acte de décès" {% if req['type'] == 'Acte de décès' %}selected{% endif %}>Acte de décès</option>
+          <option value="Légalisation de document" {% if req['type'] == 'Légalisation de document' %}selected{% endif %}>Légalisation de document</option>
+          <option value="Certificat de résidence" {% if req['type'] == 'Certificat de résidence' %}selected{% endif %}>Certificat de résidence</option>
+          <option value="Réclamation" {% if req['type'] == 'Réclamation' %}selected{% endif %}>Réclamation</option>
+        </select>
+        
+        <label>Titre</label>
+        <input name="title" value="{{ req['title'] }}" required placeholder="Ex: Acte de naissance pour concours">
+        
+        <label>Description</label>
+        <textarea name="description" rows="5" placeholder="Détails utiles...">{{ req['description'] or '' }}</textarea>
+        
+        <label>Pièce jointe actuelle</label>
+        {% if req['attachment'] %}
+          <p>
+            <a href="{{ url_for('uploaded_file', fname=req['attachment']) }}">{{ req['attachment'] }}</a>
+            <br>
+            <input type="checkbox" name="remove_attachment" value="1"> Supprimer ce fichier
+          </p>
+        {% else %}
+          <p>Aucun fichier joint</p>
+        {% endif %}
+        
+        <label>Nouvelle pièce jointe (optionnel)</label>
+        <input type="file" name="attachment" accept=".pdf,.jpg,.png,.jpeg">
+        
+        <div style="display:flex;gap:10px">
+          <a class="btn" href="{{ url_for('citizen_dashboard') }}">Annuler</a>
+          <button class="btn primary" type="submit">Enregistrer les modifications</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

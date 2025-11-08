@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Espace citoyen</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h2>Espace citoyen</h2>
+      <nav>
+        <a class="btn" href="{{ url_for('citizen_new') }}">Nouvelle demande</a>
+        <a class="btn" href="{{ url_for('logout') }}">Déconnexion</a>
+      </nav>
+    </header>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for cat,msg in messages %}
+        <div class="flash {{cat}}">{{msg}}</div>
+      {% endfor %}
+    {% endwith %}
+    <div class="card">
+      <h3>Mes demandes</h3>
+      <table>
+        <tr>
+          <th>#</th>
+          <th>Type</th>
+          <th>Titre</th>
+          <th>Statut</th>
+          <th>Créée</th>
+          <th>Pièce</th>
+          <th>Actions</th>
+        </tr>
+        {% for r in reqs %}
+        <tr>
+          <td>{{ r['id'] }}</td>
+          <td>{{ r['type'] }}</td>
+          <td>{{ r['title'] }}</td>
+          <td><span class="status">{{ r['status'] }}</span></td>
+          <td>{{ r['created_at'] }}</td>
+          <td>
+            {% if r['attachment'] %}
+              <a class="btn small" href="{{ url_for('uploaded_file', fname=r['attachment']) }}">Voir</a>
+            {% else %}
+              -
+            {% endif %}
+          </td>
+          <td>
+            {% if r['status'] == "En attente" %}
+              <!-- Bouton Modifier -->
+              <a class="btn small" href="{{ url_for('citizen_edit_request', req_id=r['id']) }}">✏️ Modifier</a>
+              <!-- Bouton Supprimer -->
+              <form action="{{ url_for('citizen_delete_request', req_id=r['id']) }}" 
+                    method="post" 
+                    style="display:inline;"
+                    onsubmit="return confirm('Voulez-vous vraiment supprimer cette demande ?');">
+                <button type="submit" class="btn small danger">🗑️ Supprimer</button>
+              </form>
+            {% else %}
+              <em>Action non disponible</em>
+            {% endif %}
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="7">Aucune demande pour l'instant.</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</body>
+</html>

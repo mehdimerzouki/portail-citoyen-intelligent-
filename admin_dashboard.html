@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Espace Administrateur</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h2>Espace Administrateur</h2>
+      <nav>
+        <a class="btn" href="{{ url_for('approve_agents') }}">Approuver Agents</a>
+        <a class="btn" href="{{ url_for('logout') }}">Déconnexion</a>
+      </nav>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for cat,msg in messages %}
+        <div class="flash {{cat}}">{{msg}}</div>
+      {% endfor %}
+    {% endwith %}
+
+    <div class="card">
+      <h3>Fonctions administratives</h3>
+      <p>Bienvenue dans l'espace administrateur. Vous pouvez gérer les comptes agents et suivre les demandes citoyennes.</p>
+
+      <div class="features">
+        <div class="feature-card">
+          <h3>Approbation des Agents</h3>
+          <p>Consultez et approuvez les comptes agents en attente.</p>
+          <a class="btn" href="{{ url_for('approve_agents') }}">Accéder</a>
+        </div>
+
+       
+</body>
+</html>

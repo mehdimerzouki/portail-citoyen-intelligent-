@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Approbation des agents</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h2>Approbation des comptes agents</h2>
+      <nav>
+        <a class="btn" href="{{ url_for('agent_dashboard') }}">← Retour</a>
+        <a class="btn" href="{{ url_for('logout') }}">Déconnexion</a>
+      </nav>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for cat,msg in messages %}
+        <div class="flash {{cat}}">{{msg}}</div>
+      {% endfor %}
+    {% endwith %}
+
+    <div class="card">
+      <h3>Agents en attente d'approbation</h3>
+      
+      {% if pending_agents %}
+        <table>
+          <tr>
+            <th>ID</th><th>Nom</th><th>Email</th><th>Date d'inscription</th><th>Action</th>
+          </tr>
+          {% for agent in pending_agents %}
+          <tr>
+            <td>{{ agent.id }}</td>
+            <td>{{ agent.full_name }}</td>
+            <td>{{ agent.email }}</td>
+            <td>{{ agent.registration_date }}</td>
+            <td>
+              <form method="post" style="display:inline;">
+                <input type="hidden" name="agent_id" value="{{ agent.id }}">
+                <input type="hidden" name="action" value="approve">
+                <button type="submit" class="btn primary small">Approuver</button>
+              </form>
+              <form method="post" style="display:inline;">
+                <input type="hidden" name="agent_id" value="{{ agent.id }}">
+                <input type="hidden" name="action" value="reject">
+                <button type="submit" class="btn small" style="background:#e74c3c;color:white;">Rejeter</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      {% else %}
+        <p>Aucun agent en attente d'approbation.</p>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>

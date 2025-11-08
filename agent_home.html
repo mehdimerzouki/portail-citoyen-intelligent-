@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Espace Agent</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    .hero {
+      text-align: center;
+      padding: 40px 0;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #2563eb;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #6b7280;
+      margin-bottom: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+    .feature-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      width: 280px;
+      text-align: center;
+      border: 1px solid #e5e7eb;
+    }
+    .feature-card h3 {
+      color: #2563eb;
+      margin-bottom: 15px;
+    }
+    .feature-card p {
+      color: #6b7280;
+      margin-bottom: 20px;
+    }
+    .btn {
+      display: inline-block;
+      background: #2563eb;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #1e40af;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="hero">
+        <h1>Espace Agent Administratif</h1>
+        <p>Plateforme dédiée aux agents administratifs pour la gestion des demandes citoyennes.</p>
+        
+        <nav>
+          <a class="btn" href="{{ url_for('agent_dashboard') }}">Accéder à mon espace</a>
+        </nav>
+      </div>
+
+      <div class="features">
+        <div class="feature-card">
+          <h3>Gestion des Demandes</h3>
+          <p>Consultez, traitez et suivez l'état d'avancement des demandes des citoyens.</p>
+        </div>
+        
+        <div class="feature-card">
+          <h3>Validation des Documents</h3>
+          <p>Validez les documents soumis par les citoyens et mettez à jour leur statut.</p>
+        </div>
+        
+        <div class="feature-card">
+          <h3>Communication</h3>
+          <p>Échangez avec les citoyens pour obtenir des informations complémentaires.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 40px; text-align: center; color: #6b7280; font-size: 0.9rem;">
+        <p>Service sécurisé • Interface professionnelle • Outils de gestion</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

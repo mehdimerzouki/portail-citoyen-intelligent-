@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Dossier</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <a class="btn" href="{{ url_for('agent_dashboard') }}">← Retour</a>
+    <div class="card">
+      <h2>Dossier #{{ req['id'] }}</h2>
+      <p><strong>Citoyen :</strong> {{ req['full_name'] }} ({{ req['email'] }})</p>
+      <p><strong>Type :</strong> {{ req['type'] }}</p>
+      <p><strong>Titre :</strong> {{ req['title'] }}</p>
+      <p><strong>Description :</strong><br>{{ req['description'] or '-' }}</p>
+      <p><strong>Pièce jointe :</strong> 
+        {% if req['attachment'] %}
+          <a class="btn small" href="{{ url_for('uploaded_file', fname=req['attachment']) }}">Télécharger</a>
+        {% else %}
+          -
+        {% endif %}
+      </p>
+      <form method="post">
+        <label>Statut</label>
+        <select name="status">
+          {% for s in ['En attente','En cours','Validée','Rejetée'] %}
+            <option value="{{s}}" {% if req['status']==s %}selected{% endif %}>{{s}}</option>
+          {% endfor %}
+        </select>
+        <button class="btn primary" type="submit">Mettre à jour</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

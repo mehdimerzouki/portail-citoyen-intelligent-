@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Nouvelle demande</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="card" style="max-width:720px;margin:0 auto">
+      <h2>Nouvelle demande</h2>
+      <form method="post" enctype="multipart/form-data">
+        <label>Type de demande</label>
+        <select name="type" required>
+          <option value="">Choisir...</option>
+          <option>Acte de naissance</option>
+          <option>Acte de mariage</option>
+          <option>Acte de décès</option>
+          <option>Légalisation de document</option>
+          <option>Certificat de résidence</option>
+          <option>Réclamation</option>
+        </select>
+        <label>Titre</label>
+        <input name="title" required placeholder="Ex: Acte de naissance pour concours">
+        <label>Description</label>
+        <textarea name="description" rows="5" placeholder="Détails utiles..."></textarea>
+        <label>Pièce jointe (optionnel)</label>
+        <input type="file" name="attachment" accept=".pdf,.jpg,.png,.jpeg">
+        <div style="display:flex;gap:10px">
+          <a class="btn" href="{{ url_for('citizen_dashboard') }}">Annuler</a>
+          <button class="btn primary" type="submit">Envoyer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

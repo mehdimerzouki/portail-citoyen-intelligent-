@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Connexion</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="card" style="max-width:520px;margin:0 auto">
+      <h2>Connexion</h2>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for cat,msg in messages %}
+          <div class="flash {{cat}}">{{msg}}</div>
+        {% endfor %}
+      {% endwith %}
+      <form method="post">
+        <label>Email</label>
+        <input name="email" placeholder="Votre adresse email" required>
+        
+        <label>Mot de passe</label>
+        <input type="password" name="password" placeholder="Votre mot de passe" required>
+        
+        <button class="btn primary" type="submit">Se connecter</button>
+      </form>
+      <footer>
+        Pas encore de compte? <a href="{{ url_for('register') }}">S'inscrire</a>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

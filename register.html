@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Inscription</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="card" style="max-width:520px;margin:0 auto">
+      <h2>Créer un compte</h2>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for cat,msg in messages %}
+          <div class="flash {{cat}}">{{msg}}</div>
+        {% endfor %}
+      {% endwith %}
+      <form method="post">
+        <label>Nom complet</label>
+        <input type="text" name="full_name" placeholder="Votre nom complet" required>
+        
+        <label>Email</label>
+        <input type="email" name="email" placeholder="ex: votrenom@example.com" required>
+        
+        <label>Mot de passe</label>
+        <input type="password" name="password" placeholder="Minimum 6 caractères" required>
+        
+        <label>Type de compte</label>
+        <select name="role" required>
+          <option value="citizen">Citoyen</option>
+          <option value="agent">Agent administratif</option>
+        </select>
+        <small style="display:block; margin-top:-10px; margin-bottom:15px; color:#666;">
+          Les comptes agents nécessitent une approbation manuelle.
+        </small>
+        
+        <button class="btn primary" type="submit">S'inscrire</button>
+      </form>
+      <footer>Déjà inscrit? <a href="{{ url_for('login') }}">Se connecter</a></footer>
+    </div>
+  </div>
+</body>
+</html>

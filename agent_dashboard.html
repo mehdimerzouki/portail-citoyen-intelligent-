@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Espace agent</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h2>Tableau de bord agent</h2>
+      <nav>
+      
+        <a class="btn" href="{{ url_for('logout') }}">Déconnexion</a>
+      </nav>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for cat,msg in messages %}
+        <div class="flash {{cat}}">{{msg}}</div>
+      {% endfor %}
+    {% endwith %}
+
+    <div class="card">
+      <h3>Demandes</h3>
+      <table>
+        <tr>
+          <th>#</th><th>Citoyen</th><th>Email</th><th>Type</th>
+          <th>Titre</th><th>Statut</th><th>Créée</th><th>Action</th>
+        </tr>
+        {% for r in reqs %}
+        <tr>
+          <td>{{ r['id'] }}</td>
+          <td>{{ r['full_name'] }}</td>
+          <td>{{ r['email'] }}</td>
+          <td>{{ r['type'] }}</td>
+          <td>{{ r['title'] }}</td>
+          <td><span class="status {{ r['status']|lower|replace(' ', '_') }}">{{ r['status'] }}</span></td>
+          <td>{{ r['created_at'] }}</td>
+          <td><a class="btn small" href="{{ url_for('agent_request', req_id=r['id']) }}">Ouvrir</a></td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="8" style="text-align:center;color:#7f8c8d;">Aucune demande.</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</body>
+</html>
